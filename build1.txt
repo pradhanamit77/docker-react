@@ -1,0 +1,53 @@
+Sending build context to Docker daemon  1.412MB
+Step 1/8 : FROM node:alpine as builder
+ ---> d1be9f6b8ac1
+Step 2/8 : WORKDIR '/app'
+ ---> Using cache
+ ---> 82f31a00507b
+Step 3/8 : COPY package.json .
+ ---> Using cache
+ ---> e6c509eb8761
+Step 4/8 : RUN npm install
+ ---> Using cache
+ ---> 759a5f77dc39
+Step 5/8 : COPY . .
+ ---> e93eb535a7cd
+Step 6/8 : RUN npm run build
+ ---> Running in 246438ad4012
+
+> frontend@0.1.0 build /app
+> react-scripts build
+
+Creating an optimized production build...
+Compiled successfully.
+
+File sizes after gzip:
+
+  39.93 KB       build/static/js/2.29769018.chunk.js
+  771 B          build/static/js/runtime-main.4ee28378.js
+  636 B (+26 B)  build/static/js/main.a143f0bf.chunk.js
+  547 B          build/static/css/main.d1b05096.chunk.css
+
+The project was built assuming it is hosted at the server root.
+You can control this with the homepage field in your package.json.
+For example, add this to build it for GitHub Pages:
+
+  "homepage" : "http://myname.github.io/myapp",
+
+The build folder is ready to be deployed.
+You may serve it with a static server:
+
+  npm install -g serve
+  serve -s build
+
+Find out more about deployment here:
+
+  bit.ly/CRA-deploy
+
+Removing intermediate container 246438ad4012
+ ---> a0f3483d2b4f
+Step 7/8 : FROM nginx
+ ---> 540a289bab6c
+Step 8/8 : COPY --from=builder /app/build /usr/share/nginx/html
+ ---> 36d4f6d01eb0
+Successfully built 36d4f6d01eb0
