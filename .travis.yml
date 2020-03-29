@@ -1,7 +1,11 @@
+sudo: required
 services:
     - docker
 
 before_install:
+    - echo "Before install start"
+    - gem install bundler
+    - echo "Before install end"
     - docker build -t pradhanamit77/docker-react -f Dockerfile.dev .
 
 script:
